@@ -1,0 +1,36 @@
+1)Install Microsoft SQL Server Management Studio
+2)Conncet with Blue Prism DB Connection
+3)Once Connected Create MySampleDB Database
+4)Now open the Query Editor from File Menu and Copy paste the below Query
+
+CREATE TABLE [dbo].[StudentMarks](
+	[Name] [varchar](50) Null,
+	[Class] [varchar](50) Null,
+	[RollNo] [varchar](50) Null,
+	[English] [int] Null,
+	[Hindi] [int] Null,
+	[Sanskrit] [int] Null,
+	[Maths] [int] Null,
+	[Science] [int] Null,
+	[Social] [int] Null
+)
+
+INSERT INTO [dbo].[StudentMarks]
+	([Name],
+	[Class],
+	[RollNo],
+	[English],
+	[Hindi],
+	[Sanskrit],
+	[Maths],
+	[Science],
+	[Social])
+VALUES  ('Jack','10','1',98,97,95,100,100,100),
+	('Smith','10','2',97,97,96,100,100,100),
+	('Sunita','10','3',98,97,96,99,100,100),
+	('Alex','10','4',93,97,95,100,99,98),
+	('Sam','10','5',96,97,94,100,99,100)
+
+5) Now click on Execute button
+6) Now right click on dbo.StudentMarks and Select option "Select 1000 Rows"
+7) Now go for Process Creation in Bp
