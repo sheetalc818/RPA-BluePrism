@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<bpr:release xmlns:bpr="http://www.blueprism.co.uk/product/release">
+    <bpr:name>queue</bpr:name>
+    <bpr:release-notes />
+    <bpr:created>2020-11-14 08:21:53Z</bpr:created>
+    <bpr:package-id>5</bpr:package-id>
+    <bpr:package-name>queue</bpr:package-name>
+    <bpr:user-created-by>admin</bpr:user-created-by>
+    <bpr:contents count="1">
+        <work-queue id="6" name="FlipkartQueue" key-field="Field 1" xmlns="http://www.blueprism.co.uk/product/work-queue" />
+    </bpr:contents>
+</bpr:release>

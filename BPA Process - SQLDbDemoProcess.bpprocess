@@ -1,0 +1,97 @@
+﻿<process name="SQLDbDemoProcess" version="1.0" bpversion="6.9.0.26970" narrative="Demonstrating how to connect with DB" byrefcollection="true" preferredid="2caab619-3940-4fbc-a1d8-4a25f907ab5d">
+  <view>
+    <camerax>0</camerax>
+    <cameray>0</cameray>
+    <zoom version="2">1.25</zoom>
+  </view>
+  <preconditions />
+  <endpoint narrative="" />
+  <stage stageid="bda7ce8e-620a-4289-aa15-396895ec788d" name="Start" type="Start">
+    <display x="-315" y="-270" w="90" h="60" />
+    <onsuccess>33b8f6b0-f5e1-4a52-8fba-34d49b509198</onsuccess>
+  </stage>
+  <stage stageid="0121c7be-4c7f-48c2-a2a1-2a206dfea882" name="End" type="End">
+    <display x="-315" y="105" w="90" h="60" />
+  </stage>
+  <stage stageid="036654c5-e4f1-4955-8014-c2433c8c8b49" name="Stage1" type="ProcessInfo">
+    <display x="-480" y="-180" w="150" h="90" />
+  </stage>
+  <stage stageid="33b8f6b0-f5e1-4a52-8fba-34d49b509198" name="SetConnectionToDB" type="Action">
+    <loginhibit onsuccess="true" />
+    <display x="-315" y="-180" w="90" h="60" />
+    <inputs>
+      <input type="text" name="Server" friendlyname="Server" narrative="The name of the server and, if necessary, instance name of the SQL Server instance to connect to" expr="&quot;(LocalDB)\BluePrismLocalDB&quot;" />
+      <input type="text" name="Database" friendlyname="Database" narrative="The name of the database to connect to" expr="&quot;MySampleDB&quot;" />
+      <input type="text" name="User" friendlyname="User" narrative="If appropriate, the login name to use to connect to SQL Server. If left empty, windows authentication using the current user will be used instead of SQL Server authentication" expr="" />
+      <input type="password" name="Password" friendlyname="Password" narrative="If appropriate, the password to use with the above login name to access SQL Server. Unused for windows authentication" expr="" />
+    </inputs>
+    <onsuccess>f4385efe-9b46-423c-946f-85a855e7d10d</onsuccess>
+    <resource object="Data - SQL Server" action="Set Connection" />
+  </stage>
+  <stage stageid="f4385efe-9b46-423c-946f-85a855e7d10d" name="Fetch Data From MySampleDB" type="Action">
+    <loginhibit onsuccess="true" />
+    <display x="-315" y="-75" w="90" h="60" />
+    <inputs>
+      <input type="text" name="SQL" friendlyname="SQL" narrative="The SQL query to use to perform this action" expr="&quot;SELECT TOP (1000) [Name]&#xA;      ,[Class]&#xA;      ,[RollNo]&#xA;      ,[English]&#xA;      ,[Hindi]&#xA;      ,[Sanskrit]&#xA;      ,[Maths]&#xA;      ,[Science]&#xA;      ,[Social],NULL as Results&#xA;  FROM [MySampleDB].[dbo].[StudentMarks]&quot;" />
+    </inputs>
+    <outputs>
+      <output type="flag" name="Success" friendlyname="Success" narrative="Flag indicating success (True) or failure (False)" stage="Success" />
+      <output type="text" name="Message" friendlyname="Message" narrative="Error message giving detail regarding why this action failed" stage="Message" />
+      <output type="collection" name="Results" friendlyname="Results" narrative="The collection of results from the query" stage="StudentMarks" />
+    </outputs>
+    <onsuccess>df31ce9b-413e-4542-be59-da24ef0cc031</onsuccess>
+    <resource object="Data - SQL Server" action="Get Collection" />
+  </stage>
+  <stage stageid="1a02a924-b718-4733-9ed5-e68faff8466b" name="Success" type="Data">
+    <display x="45" y="-225" w="90" h="60" />
+    <datatype>flag</datatype>
+    <initialvalue />
+    <private />
+    <alwaysinit />
+  </stage>
+  <stage stageid="1d8de905-4941-4ed0-b6b3-287962c2f9c5" name="Message" type="Data">
+    <display x="45" y="-135" w="90" h="60" />
+    <datatype>text</datatype>
+    <initialvalue />
+    <private />
+    <alwaysinit />
+  </stage>
+  <stage stageid="1e0fc008-abea-468e-9c5c-20bc784e4335" name="StudentMarks" type="Collection">
+    <display x="45" y="-15" w="90" h="60" />
+    <datatype>collection</datatype>
+    <private />
+    <alwaysinit />
+    <collectioninfo>
+      <field name="Name" type="text" />
+      <field name="Class" type="text" />
+      <field name="RollNo" type="text" />
+      <field name="English" type="number" />
+      <field name="Hindi" type="number" />
+      <field name="Sanskrit" type="number" />
+      <field name="Science" type="number" />
+      <field name="Maths" type="number" />
+      <field name="Social" type="number" />
+      <field name="Results" type="number" />
+    </collectioninfo>
+  </stage>
+  <stage stageid="df31ce9b-413e-4542-be59-da24ef0cc031" name="StudentForLoop" type="LoopStart">
+    <loginhibit onsuccess="true" />
+    <display x="-150" y="-75" w="90" h="60" />
+    <onsuccess>871c95fb-b13b-45fd-81ff-9fca48db7dd2</onsuccess>
+    <groupid>b78f1b6e-8953-4fe2-a060-457b2d9f9459</groupid>
+    <looptype>ForEach</looptype>
+    <loopdata>StudentMarks</loopdata>
+  </stage>
+  <stage stageid="94fcdec0-65ef-4b43-9d05-dc00994ac3d5" name="StudentForLoop" type="LoopEnd">
+    <loginhibit onsuccess="true" />
+    <display x="-150" y="105" w="90" h="60" />
+    <onsuccess>0121c7be-4c7f-48c2-a2a1-2a206dfea882</onsuccess>
+    <groupid>b78f1b6e-8953-4fe2-a060-457b2d9f9459</groupid>
+  </stage>
+  <stage stageid="871c95fb-b13b-45fd-81ff-9fca48db7dd2" name="SumOfMarks" type="Calculation">
+    <loginhibit onsuccess="true" />
+    <display x="-150" y="15" w="90" h="60" />
+    <onsuccess>94fcdec0-65ef-4b43-9d05-dc00994ac3d5</onsuccess>
+    <calculation expression="[StudentMarks.Social]+[StudentMarks.Science]+[StudentMarks.Sanskrit]+[StudentMarks.English]+[StudentMarks.Hindi]+[StudentMarks.Maths]" stage="StudentMarks.Results" />
+  </stage>
+</process>
